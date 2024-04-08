@@ -9,7 +9,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 require("dotenv").config();
-const config = require("./public/config/config");
+const config = require("./config/config");
 console.log(config.MONGODB_URL_DEV);
 
 var app = express();

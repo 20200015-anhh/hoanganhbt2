@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var express = require('express');
 
 require("dotenv").config();
-const config = require("../config/config")
+const config = require("../../config/config")
 mongoose.connect(config.MONGODB_URL_DEV);
 const db = mongoose.connection
 
