@@ -1,5 +1,5 @@
-const Bill = require("../../models/Bill");
-const Client = require("../../models/Client")
+const Bill = require("../models/Bill");
+const Client = require("../models/Bill")
 
 const getAllAdRates = (req, res) => {
   Bill.aggregate([
