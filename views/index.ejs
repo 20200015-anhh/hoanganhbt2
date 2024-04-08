@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <table>
+        <thead>
+          <tr>
+            <th class="columntitle" colspan="6"></th>
+            <th class="columntitle" colspan="2">Đơn giá(VND)</th>
+            <th class="columntitle" colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var stt=0 %> 
+          <% var powner = ""%>
+          <% var type =0%> 
+          <% for (const result of data) { %>
+            <% console.log(result); %> 
+          <% if(result.owner != powner){%>
+            <tr>
+              <% if(result.bill && type!=2){%>
+                <tr>
+                  <th class="columntitle">STT<br />NO</th>
+                  <th class="columntitle">Website<br />Website</th>
+                  <th class="columntitle">Tên vị trí<br />Ads Position</th>
+                  <th class="columntitle">
+                    Kích thước (px)<br />Dimensions (px)
+                  </th>
+                  <th class="columntitle">Nền tảng<br />Platform</th>
+                  <th class="columntitle">Demo<br />Demo</th>
+                  <th class="columntitle">Cách tính giá<br />Buying Method</th>
+                  <th class="columntitle">Đơn giá(VND)</th>
+                  <th class="columntitle">
+                    CTR trung bình (%)<br />Average CTR (%)
+                  </th>
+                  <th class="columntitle">Est. Traffic<br />/tuần<br />/slot</th>
+                  <th class="columntitle">Note</th>
+                </tr>
+                <%type=2%>
+              <%}%>
+              <% if(result.homepage&& type!=1){%>
+                <tr>
+                  <th class="columntitle">STT<br />NO</th>
+                  <th class="columntitle">Website<br />Website</th>
+                  <th class="columntitle">Tên vị trí<br />Ads Position</th>
+                  <th class="columntitle">
+                    Kích thước (px)<br />Dimensions (px)
+                  </th>
+                  <th class="columntitle">Nền tảng<br />Platform</th>
+                  <th class="columntitle">Demo<br />Demo</th>
+                  <th class="columntitle">Cách tính giá<br />Buying Method</th>
+                  <th class="columntitle">Trang chủ <br />Homepage</th>
+                  <th class="columntitle">
+                    Roadblock xuyên site <br />(Độc quyền ngày)<br />Cross-site
+                    roadblock<br />(Exclusive date)
+                  </th>
+                  <th class="columntitle">
+                    CTR trung bình (%)<br />Average CTR (%)
+                  </th>
+                  <th class="columntitle">Est. Traffic<br />/tuần<br />/slot</th>
+                </tr>
+                <%type=1%>
+              <%}%>
+              <td colspan="11">
+                <a href="https://"+ <%=result.owner%>>
+                  <%=result.owner%>
+                </a>
+              </td>
+            </tr>
+          <%}%>
+          <tr>
+            <% if(result.owner != powner){%>
+              <%stt++%>
+              <%}%>
+            <td>      
+              <%=stt%>
+            </td>
+            <td>      
+              <a href="https://"+ <%=result.owner%>>
+                <%=result.owner%>
+              </a>
+            </td>
+            <td>
+              <%=result.position%>
+            </td>
+            <td>
+              <pre class="size"><%= result.position_info[0].size.trim() %></pre>
+            </td>
+            <td>
+              <%=result.position_info[0].platform%>
+            </td>
+            <td>
+              <% result.position_info[0].demolinks.forEach((demolink, index) => { %>
+                <a href=<%=demolink%>> <%=result.position_info[0].demonames[index]%></a><br/>
+              <% }) %>
+            </td>
+            <td>
+              <%=result.method%>
+            </td>
+            <td>
+              <%if(result.bill)%>
+                <%=result.bill%>
+              <%if(result.homepage)%>
+                <%=result.homepage%>
+            </td>  
+            <td>
+              <%=result.ctr%>
+            </td>  
+            <td>
+              <%=result.est%>
+            </td>        
+          </tr>
+          <%powner=result.owner%>
+        <%}%>
+        </tbody>
+      </table>
+    </div>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/jquery.table.marge.js"></script>
+    <script>
+       $(document).ready(function() {
+        $('table').margetable({
+          type: 2,
+          colindex: [1, 0, 4, 5, 2, 3, 6, 7]// column 1, 2
+        });
+      });
+    </script>
+  </body>
+</html>

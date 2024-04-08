@@ -1,0 +1,40 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.bill{
+  font-weight: bold;
+  background-color: #073763;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white;
+  font-size: 20px;
+  justify-items: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center; /* Center align all text in the table */
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center; /* Center align text in all cells */
+
+}
+
+tbody tr td {
+  vertical-align: middle; /* Center align content vertically */
+}
+
+
+
