@@ -4,6 +4,6 @@ const fs = require('fs').promises;
 const path = require('path');
 const controller = require ("../controllers/DBController")
 
-router.get('/', controller.getAllAdRates);
+router.get('/', controller.getAll);
 
 module.exports = router;

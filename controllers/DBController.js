@@ -1,32 +1,58 @@
-const Bill = require("../models/Bill");
-const Client = require("../models/Bill")
+const Position = require("../models/Position");
 
-const getAllAdRates = (req, res) => {
-  Bill.aggregate([
+const getAll = (req, res) => {
+  Position.aggregate([
     {
       $lookup: {
-        from: "positions",
-        let: { owner: { $toLower: "$owner" }, position: { $toLower: "$position" } },
-        pipeline: [
-          {
-            $match: {
-              $expr: {
-                $and: [
-                  { $eq: [{ $toLower: "$owner" }, "$$owner"] },
-                  { $eq: [{ $toLower: "$name" }, "$$position"] }
-                ]
-              }
-            }
-          },
-          {$sort: { "platform": 1 ,"demonames":1} }
-        ],
-        as: "position_info"
+        from: "bills",
+        localField: "_id",
+        foreignField: "position",
+        as: "bills"
       }
     },
-    {$sort: { "owner": 1,"bill":1 } }
+    {
+      $unwind: "$bills"
+    },
+    {
+      $lookup: {
+        from: "clients",
+        localField: "owner",
+        foreignField: "_id",
+        as: "client"
+      }
+    },
+    {
+      $unwind: "$client"
+    },
+    {
+      $sort: {
+        "bills.type":1,
+        "client.name": 1,
+        "platform": 1,
+        "name": 1
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        type: "$bills.type",
+        owner: "$client.name",
+        position: "$name",
+        method: "$bills.method",
+        homepage: "$bills.homepage",
+        roablock: "$bills.roadblock",
+        ctr: "$bills.ctr",
+        platform: 1,
+        bill: "$bills.bill",
+        size:1,
+        note: "$bills.note",
+        demonames: 1,
+        demolinks: 1
+      }
+    }
   ])
   .then(results => {
-    Client
+    console.log(results);
     res.render("index", {title:"baogia", data:results})
   })
   .catch(err => {
@@ -35,4 +61,6 @@ const getAllAdRates = (req, res) => {
   });
 };
 
-module.exports = { getAllAdRates };
+
+
+module.exports = { getAll };

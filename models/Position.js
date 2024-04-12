@@ -7,7 +7,7 @@ const PositionSchema = new Schema({
         required: true,
     },
     owner:{
-        type:String,
+        type: mongoose.ObjectId,
         required: true,
     },
     size: {

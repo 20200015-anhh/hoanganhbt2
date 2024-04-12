@@ -11,21 +11,42 @@
       <table>
         <thead>
           <tr>
-            <th class="columntitle" colspan="6"></th>
+            <th colspan="6"></th>
             <th class="columntitle" colspan="2">Đơn giá(VND)</th>
-            <th class="columntitle" colspan="2"></th>
+            <th colspan="2"></th>
           </tr>
         </thead>
         <tbody>
           <% var stt=0 %> 
           <% var powner = ""%>
-          <% var type =0%> 
+          <% var ptype =0%> 
           <% for (const result of data) { %>
-            <% console.log(result); %> 
-          <% if(result.owner != powner){%>
-            <tr>
-              <% if(result.bill && type!=2){%>
-                <tr>
+          <% if(result.owner != powner){%> 
+              <% if(ptype!=result.type){%>
+                <% if(result.type == 1){%>
+                  <tr class="columntitle">
+                    <th class="columntitle">STT<br />NO</th>
+                    <th class="columntitle">Website<br />Website</th>
+                    <th class="columntitle">Tên vị trí<br />Ads Position</th>
+                    <th class="columntitle">
+                      Kích thước (px)<br />Dimensions (px)
+                    </th>
+                    <th class="columntitle">Nền tảng<br />Platform</th>
+                    <th class="columntitle">Demo<br />Demo</th>
+                    <th class="columntitle">Cách tính giá<br />Buying Method</th>
+                    <th class="columntitle">Trang chủ <br />Homepage</th>
+                    <th class="columntitle">
+                      Roadblock xuyên site <br />(Độc quyền ngày)<br />Cross-site
+                      roadblock<br />(Exclusive date)
+                    </th>
+                    <th class="columntitle">
+                      CTR trung bình (%)<br />Average CTR (%)
+                    </th>
+                    <th class="columntitle">Est. Traffic<br />/tuần<br />/slot</th>
+                  </tr>
+                <%}%>
+                <% if(result.type == 2){%>
+                <tr class="columntitle">
                   <th class="columntitle">STT<br />NO</th>
                   <th class="columntitle">Website<br />Website</th>
                   <th class="columntitle">Tên vị trí<br />Ads Position</th>
@@ -42,31 +63,10 @@
                   <th class="columntitle">Est. Traffic<br />/tuần<br />/slot</th>
                   <th class="columntitle">Note</th>
                 </tr>
-                <%type=2%>
+                <%}%>
+                <%ptype = result.type%>
               <%}%>
-              <% if(result.homepage&& type!=1){%>
-                <tr>
-                  <th class="columntitle">STT<br />NO</th>
-                  <th class="columntitle">Website<br />Website</th>
-                  <th class="columntitle">Tên vị trí<br />Ads Position</th>
-                  <th class="columntitle">
-                    Kích thước (px)<br />Dimensions (px)
-                  </th>
-                  <th class="columntitle">Nền tảng<br />Platform</th>
-                  <th class="columntitle">Demo<br />Demo</th>
-                  <th class="columntitle">Cách tính giá<br />Buying Method</th>
-                  <th class="columntitle">Trang chủ <br />Homepage</th>
-                  <th class="columntitle">
-                    Roadblock xuyên site <br />(Độc quyền ngày)<br />Cross-site
-                    roadblock<br />(Exclusive date)
-                  </th>
-                  <th class="columntitle">
-                    CTR trung bình (%)<br />Average CTR (%)
-                  </th>
-                  <th class="columntitle">Est. Traffic<br />/tuần<br />/slot</th>
-                </tr>
-                <%type=1%>
-              <%}%>
+            <tr>
               <td colspan="11">
                 <a href="https://"+ <%=result.owner%>>
                   <%=result.owner%>
@@ -90,14 +90,14 @@
               <%=result.position%>
             </td>
             <td>
-              <pre class="size"><%= result.position_info[0].size.trim() %></pre>
+              <pre class="size"><%= result.size.trim() %></pre>
             </td>
             <td>
-              <%=result.position_info[0].platform%>
+              <%=result.platform%>
             </td>
             <td>
-              <% result.position_info[0].demolinks.forEach((demolink, index) => { %>
-                <a href=<%=demolink%>> <%=result.position_info[0].demonames[index]%></a><br/>
+              <% result.demolinks.forEach((demolink, index) => { %>
+                <a href=<%=demolink%>> <%=result.demonames[index]%></a><br/>
               <% }) %>
             </td>
             <td>

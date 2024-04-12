@@ -7,18 +7,6 @@ body {
   display: flex;
   justify-content: center;
 }
-.bill{
-  font-weight: bold;
-  background-color: #073763;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: white;
-  font-size: 20px;
-  justify-items: center;
-}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -36,5 +24,9 @@ tbody tr td {
   vertical-align: middle; /* Center align content vertically */
 }
 
+.columntitle{
+  background-color: #073763;
+  color: white;
+}
 
 

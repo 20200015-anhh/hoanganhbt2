@@ -3,14 +3,11 @@ const Schema = mongoose.Schema;
 
 const BillSchema = new Schema({
     position:{
-        type:String,
+        type:mongoose.ObjectId,
+        required: true,
     },
     method:{
         type:String,
-    },
-    owner:{
-        type:String,
-        required: true,
     },
     bill:{
         type:String,
@@ -27,6 +24,12 @@ const BillSchema = new Schema({
     ctr:{
         type:String,
     },
+    type:{
+        type:Number,
+    },
+    note:{
+        type:String,
+    }
 })
 
 const Bill = mongoose.model('Bill',BillSchema);
