@@ -2,17 +2,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+table{
+  width: 100vw;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center; /* Center align all text in the table */
-}
-
 th, td {
   padding: 8px;
   border: 1px solid #ddd;
@@ -28,5 +20,15 @@ tbody tr td {
   background-color: #073763;
   color: white;
 }
-
+.namerow{
+  font-size: large;
+  background-color: red;
+}
+.nametag{
+  color:white;
+  font-weight: bold;
+}
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
 

@@ -1,0 +1,46 @@
+[
+    {
+        "num":0,
+        "columnnames":[
+            "Chưa có dữ liệu",
+            "Chưa có dữ liệu",
+            "Chưa có dữ liệu",
+            "Chưa có dữ liệu",
+            "Chưa có dữ liệu"
+        ]
+    },
+    {
+        "num":1,
+        "columnnames":[
+            "Cách tính giá\nBuying Method",
+            "Trang chủ \nHomepage",
+            "Roadblock xuyên site \n(Độc quyền ngày)\nCross-site roadblock\n(Exclusive date)",
+            "CTR trung bình (%)\nAverage CTR (%)",
+            "Est. Traffic\n/tuần\n/slot"
+        ],
+        "propertynames":[
+            "method",
+            "homepage",
+            "roadblock",
+            "ctr",
+            "est"
+        ]
+    },
+    {
+        "num":2,
+        "columnnames":[
+            "Cách tính giá\nBuying Method",
+            "Đơn giá(VND)",
+            "CTR trung bình (%)\nAverage CTR (%)",
+            "Est. Traffic\n/tuần\n/slot",
+            "Note"
+        ],
+        "propertynames":[
+            "method",
+            "bill",
+            "ctr",
+            "est",
+            "note"
+        ]
+    }
+]

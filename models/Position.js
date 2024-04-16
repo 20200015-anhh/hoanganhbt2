@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const PositionSchema = new Schema({
     name:{
-        type:String,
-        required: true,
+        type:String
     },
     owner:{
         type: mongoose.ObjectId,

@@ -9,12 +9,12 @@ const db = mongoose.connection
 const Client = require("../../models/Client")
 const Bill = require("../../models/Bill")
 const Position = require("../../models/Position")
+const Type = require("../../models/Type")
 
 const clients = require("./clients.json");
 const rawBills = require("./rawbills.json")
 const rawPositions = require("./rawpositions.json")
-
-var app = express();
+const types = require("./types.json")
 
 db.on('error', (err) => {
   console.log(err)
@@ -23,14 +23,19 @@ db.on('error', (err) => {
 db.once('open', async () => {
 
 
-  //Run first
+  // Run first
   // clients.forEach((client, index) => {
   //   const c = new Client(client)
   //   c.save()
   // })
+  // types.forEach((type, index) => {
+  //   const t = new Type(type)
+  //   t.save()
+  // })
+  
 
 
-  //Run second
+  // Run second
   // Client.find().sort({ "name": 1 }).then(
   //   (results) => {
   //     var i = 0
@@ -59,7 +64,7 @@ db.once('open', async () => {
   // )
 
 
-  //Run third
+  // Run third
   // Position.aggregate([
   //   {
   //     $lookup: {
@@ -76,7 +81,8 @@ db.once('open', async () => {
   //     $sort: {
   //       "client.name": 1,
   //       "platform": 1,
-  //       "name": 1
+  //       "name": 1,
+  //       "size":1,
   //     }
   //   },
   //   {
@@ -84,7 +90,8 @@ db.once('open', async () => {
   //       _id: 1,
   //       clientName: "$client.name",
   //       name: 1,
-  //       platform: 1
+  //       platform: 1,
+  //       size: 1,
   //     }
   //   }
   // ])
@@ -93,9 +100,29 @@ db.once('open', async () => {
   //     results.forEach((result) => {
   //       for (; i < rawBills.length; i++) {
   //         const bill = rawBills[i]
-  //         console.log("1:" + bill.position)
-  //         console.log("2:" + result.name)
-  //         if (bill.owner == result.clientName &&
+  //         if (bill.size!= null) {
+  //           console.log("1:" + bill.size)
+  //           console.log("2:" + result.size)
+  //           if (bill.owner == result.clientName &&
+  //             bill.position == result.name &&
+  //             bill.platform == result.platform &&
+  //             bill.size == result.size) {
+  //             const b = new Bill({
+  //               position: result._id,
+  //               method: bill.method,
+  //               bill: bill.bill,
+  //               homepage: bill.homepage,
+  //               roadblock: bill.roablock,
+  //               est: bill.est,
+  //               ctr: bill.ctr,
+  //               type: bill.type,
+  //               note: bill.note
+  //             })
+  //             b.save()
+  //           }
+  //           else break
+  //         }
+  //         else if (bill.owner == result.clientName &&
   //           bill.position == result.name &&
   //           bill.platform == result.platform) {
   //           const b = new Bill({
@@ -119,5 +146,5 @@ db.once('open', async () => {
   //     console.error("Error:", err);
   //     res.status(500).render("error", { error: err });
   //   });
-  
+
 })

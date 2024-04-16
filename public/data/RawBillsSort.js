@@ -14,8 +14,10 @@ fs.readFile('./public/data/rawbills.json', 'utf8', (err, data) => {
             return compareStrings(a.owner, b.owner);
         } else if (a.platform !== b.platform) {
             return compareStrings(a.platform, b.platform);
-        } else {
+        } else if (a.position !== b.position){
             return compareStrings(a.position, b.position);
+        } else if (a.size && b.size){
+            return compareStrings(a.size, b.size);
         }
     }
     
