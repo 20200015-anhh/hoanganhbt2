@@ -10,7 +10,7 @@
 </head>
 
 <body class="text-bg-dark ">
-  <div class="main">
+  <div class="main" id="main">
     <table class="table table-bordered align-middle table-dark">
       <thead>
         <tr>
@@ -23,24 +23,23 @@
         <% var stt=0 %>
         <% var powner = ""%>
         <% var ptype =-1%>
-        <% console.log(data[0]); %>
         <% for (const result of data) { %>
-        <% if(result.owner != powner){%>
+          <% console.log( "1: " + result.clientID + " 2: " + powner); %>
+
+        <% if(result.clientID+"" != powner){%>
         <% if(ptype!=result.type){%>
         <tr class="bg-primary text-white text-center">
           <th class="bg-primary text-white text-center">STT<br />NO</th>
           <th class="bg-primary text-white text-center">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center">
               Website<br />
               Website
               <div class="dropdown">
-                <button type="button" class="btn btn-link btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                  </svg>
+                <button type="button" class="btn btn-link text-white fs-5 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" data-bs-toggle="modal" href="#addclientform">Add</a></li>
+                  <li><button id="addClient" class="dropdown-item">Add</button></li>
                 </ul>
               </div>
             </div>
@@ -60,193 +59,111 @@
 
               <tr>
                 <td class="bg-danger text-white" colspan="11">
-                  <div class="d-flex justify-content-center">
+                  <div class="d-flex justify-content-center align-items-center">
                     <a class="nametag" href="https://<%=result.owner%>">
         <%=result.owner%>
         </a>
         <div class="dropdown">
-          <button type="button" class="btn btn-link btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-three-dots" viewBox="0 0 16 16">
-              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-            </svg>
+          <button type="button" class="btn btn-link text-white fs-5 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ...
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" data-bs-toggle="modal" href="#updateclientform<%=result.clientID%>">Update</a></li>
+            <li><button id="updateClient" class="dropdown-item"  value="<%= result.clientID %>">Update</button></li>
             <li><a class="dropdown-item" href="/client/delete/<%=result.clientID%>">Delete</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" href="#addpositionform<%=result.clientID%>">Add position</a></li>
+            <li><button id="addPosition" class="dropdown-item" value="<%= result.clientID %>">Add position</button></li>
           </ul>
         </div>
   </div>
   </td>
   </tr>
 
-  <!-- modal update client -->
-  <div class="modal fade" id="updateclientform<%=result.clientID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog text-bg-dark">
-      <div class="modal-content text-bg-dark">
-        <div class="modal-header text-bg-dark">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Update for client <%=result.owner%></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3 text-start">
-            <label for="clientNameUpdateInput<%=result.clientID%>" class="form-label">Name *required</label>
-            <input type="text" class="form-control text-bg-dark" id="clientNameUpdateInput<%=result.clientID%>" placeholder="required">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="clientUpdate" value="<%= result.clientID %>" data-bs-dismiss="modal">Update</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- modal add position -->
-  <div class="modal fade" id="addpositionform<%=result.clientID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog text-bg-dark">
-      <div class="modal-content text-bg-dark">
-        <div class="modal-header text-bg-dark">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add position to client <%=result.owner%></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3 text-start">
-            <label for="positionNameAddInput" class="form-label">Name *required</label>
-            <input type="text" class="form-control text-bg-dark" id="positionNameAddInput<%= result.clientID %>" placeholder="required">
-            <label for="positionSizeAddInput" class="form-label">Size</label>
-            <input type="text" class="form-control text-bg-dark" id="positionSizeAddInput<%= result.clientID %>" placeholder="required">
-            <label for="positionPlatformAddInput" class="form-label">Platform</label>
-            <input type="text" class="form-control text-bg-dark" id="positionPlatformAddInput<%= result.clientID %>" placeholder="required">
-            <label for="positionDemoNamesAddInput" class="form-label">Demo Names *divide by "\n"</label>
-            <input type="text" class="form-control text-bg-dark" id="positionDemoNamesAddInput<%= result.clientID %>" placeholder="required">
-            <label for="positionDemoLinksAddInput" class="form-label">Demo Links *divide by "\n"</label>
-            <input type="text" class="form-control text-bg-dark" id="positionDemoLinksAddInput<%= result.clientID %>" placeholder="required">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="positionAdd" value="<%= result.clientID %>" data-bs-dismiss="modal">Add</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <%}%>
             <tr>
-              <% if(result.owner != powner){%>
+              <% if(result.clientID+"" != powner){%>
   <%stt++%>
   <%}%>
               <td>      
                 <%=stt%>
   </td>
   <td>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-center" data-client="<% result.clientID %>">
       <a class="nametag" href="https://<%=result.owner%>">
         <%=result.owner%>
       </a>
       <div class="dropdown">
-        <button type="button" class="btn btn-link btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-three-dots" viewBox="0 0 16 16">
-            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-          </svg>
+        <button type="button" class="btn btn-link text-white fs-5 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ...
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" data-bs-toggle="modal" href="#updateclientform<%=result.clientID%>">Update</a></li>
+          <li><button id="updateClient" class="dropdown-item" value="<%= result.clientID %>">Update</button></li>
           <li><a class="dropdown-item" href="/client/delete/<%=result.clientID%>">Delete</a></li>
-          <li><a class="dropdown-item" data-bs-toggle="modal" href="#addpositionform<%=result.clientID%>">Add position</a></li>
+          <li><button id="addPosition" class="dropdown-item" value="<%= result.clientID %>">Add position</button></li>
         </ul>
       </div>
     </div>
   </td>
   <td>
-
     <% if(result.position){ %>
-
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-center">
       <%=result.position%>
       <div class="dropdown">
-        <button type="button" class="btn btn-link btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-three-dots" viewBox="0 0 16 16">
-            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-          </svg>
+        <button type="button" class="btn btn-link text-white fs-5 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ...
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" data-bs-toggle="modal" href="#updatepositionform<%=result.positionID%>">Update</a></li>
+          <li><button id="updatePosition" class="dropdown-item" value="<%=result.positionID %>">Update</button></li>
           <li><a class="dropdown-item" href="/position/delete/<%=result.positionID%>">Delete</a></li>
-          <li><a class="dropdown-item" data-bs-toggle="modal" href="#addbillform<%=result.positionID%>">Add bill</a></li>
+          <li><button id="addBill" class="dropdown-item" 
+            value="<%= result.positionID%>"
+            data-presenttype="<%= result.type%>"
+            
+            <% types.forEach((type,index) =>{ %>
+              data-type-<%=index%> = "<%= type.propertynames.toString() %>"
+            <%}) %>>Add bill</button></li>
         </ul>
       </div>
     </div>
-
-    <!-- modal update position -->
-    <div class="modal fade" id="updatepositionform<%=result.positionID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog text-bg-dark">
-        <div class="modal-content text-bg-dark">
-          <div class="modal-header text-bg-dark">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Update position to client <%=result.owner%></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 text-start">
-              <label for="positionNameUpdateInput" class="form-label">Name *required</label>
-              <input type="text" class="form-control text-bg-dark" id="positionNameUpdateInput<%= result.positionID %>" placeholder="required">
-              <label for="positionSizeUpdateInput" class="form-label">Size</label>
-              <input type="text" class="form-control text-bg-dark" id="positionSizeUpdateInput<%= result.positionID %>" placeholder="required">
-              <label for="positionPlatformUpdateInput" class="form-label">Platform</label>
-              <input type="text" class="form-control text-bg-dark" id="positionPlatformUpdateInput<%= result.positionID %>" placeholder="required">
-              <label for="positionDemoNamesUpdateInput" class="form-label">Demo Names *divide by "\n"</label>
-              <input type="text" class="form-control text-bg-dark" id="positionDemoNamesUpdateInput<%= result.positionID %>" placeholder="required">
-              <label for="positionDemoLinksUpdateInput" class="form-label">Demo Links *divide by "\n"</label>
-              <input type="text" class="form-control text-bg-dark" id="positionDemoLinksUpdateInput<%= result.positionID %>" placeholder="required">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="positionUpdate" value="<%= result.positionID %>" data-bs-dismiss="modal">Update</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- modal add bill -->
-    <div class="modal fade" id="addbillform<%=result.positionID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog text-bg-dark">
-        <div class="modal-content text-bg-dark">
-          <div class="modal-header text-bg-dark">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add bill to position <%=result.position%></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3 text-start" id="billtypeform<%=result.positionID%>">
-              <button id="typetrigger<%= result.positionID %>" type="button" class="btn btn-primary btn-sm dropdown-toggle" type="button" value="<% result.type %>" data-bs-toggle="dropdown" aria-expanded="false">
-                Type
-              </button>
-              <ul class="dropdown-menu">
-                <% types.forEach((type) => {%>
-                <li><button type="button" class="btn btn-link btn-smc dropdown-item" id="type" data-whatever ="<%= result.positionID %>" value="<%= type.propertynames.toString() %>"><%= type.num %></button></li>
-                <% }) %>
-              </ul>
-              <p>Current type:</p>
-              <p id="typeLabel<%=result.positionID%>"> <%= result.type %></p>
-            </div>
-            <div id="billFormInputGroup<%=result.positionID%>">
-              <% result.propertynames.forEach(property => { %>
-              <label for="bill<%=property%>AddInput" class="form-label"><%=property%></label>
-              <input type="text" class="form-control text-bg-dark" id="bill<%=property%>AddInput<%= result.positionID %>" placeholder="required">
-              <% }) %>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="billAdd" value="<%= result.positionID %>" data-bs-dismiss="modal">Add</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <% } %>
   </td>
+
+  <!-- modal add bill -->
+  <!-- <div class="modal fade" id="addbillform<%=result.positionID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-bg-dark">
+      <div class="modal-content text-bg-dark">
+        <div class="modal-header text-bg-dark">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add bill to position <%=result.position%></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3 text-start" id="billtypeform<%=result.positionID%>">
+            <button id="typetrigger<%= result.positionID %>" type="button" class="btn btn-primary btn-sm dropdown-toggle" type="button" value="<% result.type %>" data-bs-toggle="dropdown" aria-expanded="false">
+              Type
+            </button>
+            <ul class="dropdown-menu">
+              <% types.forEach((type) => {%>
+              <li><button type="button" class="btn btn-link btn-smc dropdown-item" id="type" data-whatever="<%= result.positionID %>" value="<%= type.propertynames.toString() %>"><%= type.num %></button></li>
+              <% }) %>
+            </ul>
+            <p>Current type:</p>
+            <p id="typeLabel<%=result.positionID%>"> <%= result.type %></p>
+          </div>
+          <form id="billFormInputGroup<%=result.positionID%>">
+            <% result.propertynames.forEach(property => { %>
+            <div class="mb-3 text-start">
+              <label for="bill<%=property%>AddInput" class="form-label"><%=property%></label>
+              <input type="text" class="form-control" id="bill<%=property%>AddInput<%= result.positionID %>" placeholder="required">
+            </div>
+            <% }) %>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="billAdd" value="<%= result.positionID %>" data-bs-dismiss="modal">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <% } %>
+
   <td>
     <% if (result.size) {%>
     <pre><%=result.size%></pre>
@@ -260,37 +177,30 @@
     <a href=<%=demolink%>> <%=result.demonames[index]%></a><br />
     <% }) %>
   </td>
-  <%result.propertynames.forEach(property =>{%>
-      
+  <%result.propertynames.forEach((property,index) =>{%>
+  <% if (index==0) { %>
+  <td>
+    <div class="d-flex justify-content-center align-items-center">
+      <%=result[property]%>
+      <div class="dropdown">
+        <button type="button" class="btn btn-link text-white fs-5 btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ...
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/bill/delete/<%=result.billID%>">Delete</a></li>
+        </ul>
+      </div>
+    </div>
+  </td>
+  <% } else { %>
   <td><%=result[property]%></td>
+  <% } %>
   <%}) %>
   </tr>
-  <%powner=result.owner%>
+  <%powner=result.clientID%>
   <%}%>
         </tbody>
       </table>
-      
-      <!-- modal add client -->
-      <div class="modal fade" id="addclientform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog text-bg-dark">
-          <div class="modal-content text-bg-dark">
-            <div class="modal-header text-bg-dark">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Add client</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3 text-start">
-                <label for="clientNameAddInput" class="form-label">Name *required</label>
-                <input type="text" class="form-control text-bg-dark" id="clientNameAddInput" placeholder="required">
-              </div>
-            </div>                   
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="clientAdd" data-bs-dismiss="modal">Add</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> 
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
     <script src="/javascripts/jquery.min.js"></script>
