@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
 <body class="text-bg-dark ">
   <div class="main" id="main">
     <table class="table table-bordered align-middle table-dark">
@@ -56,7 +55,6 @@
         </tr>
         <%ptype = result.type%>
         <%}%>
-
               <tr>
                 <td class="bg-danger text-white" colspan="11">
                   <div class="d-flex justify-content-center align-items-center">
@@ -76,7 +74,6 @@
   </div>
   </td>
   </tr>
-
   <%}%>
             <tr>
               <% if(result.clientID+"" != powner){%>
@@ -124,44 +121,6 @@
       </div>
     </div>
   </td>
-
-  <!-- modal add bill -->
-  <!-- <div class="modal fade" id="addbillform<%=result.positionID%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog text-bg-dark">
-      <div class="modal-content text-bg-dark">
-        <div class="modal-header text-bg-dark">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add bill to position <%=result.position%></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3 text-start" id="billtypeform<%=result.positionID%>">
-            <button id="typetrigger<%= result.positionID %>" type="button" class="btn btn-primary btn-sm dropdown-toggle" type="button" value="<% result.type %>" data-bs-toggle="dropdown" aria-expanded="false">
-              Type
-            </button>
-            <ul class="dropdown-menu">
-              <% types.forEach((type) => {%>
-              <li><button type="button" class="btn btn-link btn-smc dropdown-item" id="type" data-whatever="<%= result.positionID %>" value="<%= type.propertynames.toString() %>"><%= type.num %></button></li>
-              <% }) %>
-            </ul>
-            <p>Current type:</p>
-            <p id="typeLabel<%=result.positionID%>"> <%= result.type %></p>
-          </div>
-          <form id="billFormInputGroup<%=result.positionID%>">
-            <% result.propertynames.forEach(property => { %>
-            <div class="mb-3 text-start">
-              <label for="bill<%=property%>AddInput" class="form-label"><%=property%></label>
-              <input type="text" class="form-control" id="bill<%=property%>AddInput<%= result.positionID %>" placeholder="required">
-            </div>
-            <% }) %>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="billAdd" value="<%= result.positionID %>" data-bs-dismiss="modal">Add</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <% } %>
 
   <td>
@@ -201,7 +160,6 @@
   <%}%>
         </tbody>
       </table>
-
     </div>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/jquery.table.marge.js"></script>
@@ -216,7 +174,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/javascripts/client.js"></script>
     <script src="/javascripts/position.js"></script>
-    <script src="/javascripts/bill.js"></script>
-    
+    <script src="/javascripts/bill.js"></script>   
   </body>
 </html>
